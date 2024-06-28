@@ -41,19 +41,24 @@ function Dropzone({userProfileId}) {
     const formData = new FormData();
     formData.append("file", file);
 
-    axios.post(
-      `http://localhost:8080/api/v1/user-profile/${userProfileId}/image/upload`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data"
+    const postUserProfikes = async () => {
+      await axios.post(
+        `http://localhost:8080/api/v1/user-profile/${userProfileId}/image/upload`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
         }
-      }
-    ).then(() => {
-      console.log("file upload succesfully");
-    }).catch(err => {
-      console.log(err);
-    });
+      ).then(() => {
+        console.log("file upload succesfully");
+      }).catch(err => {
+        console.log(err);
+      });
+    }
+
+    postUserProfikes();
+
   });
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
